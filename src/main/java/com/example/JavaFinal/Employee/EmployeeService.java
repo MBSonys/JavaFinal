@@ -29,6 +29,12 @@ public class EmployeeService {
 
 
     public void addNewEmployee(Employee employee) {
+        if (employee.getName().contains(" ")) {
+            employee.setName(employee.getName().substring(0, employee.getName().indexOf(" ") + 1 ));
+        }
+        if (employee.getSalary() < 22000) {
+            throw new IllegalStateException("Employee salary can't be less than 22000 Eur");
+        }
         employeeRepository.save(employee);
     }
 
